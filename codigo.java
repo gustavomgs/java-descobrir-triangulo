@@ -1,65 +1,82 @@
 import java.util.Scanner;
-import java.io.IOException;
 
-//Crie um programinha em java que leia 
-//3 valores que representam os lados de um triângulo;
-//Verifique se é um 
-//triângulo equilatero (três lados iguais), 
-//isósceles (dois lados iguais) 
-//escaleno (três lados diferentes). 
-
-//IF
-//AND (&&)
-//OR (||)
-//IGUAL ==
-//DIFERENTE !=
-
-
-class Console {
+class ContaBancaria {
+    
+  static double saldo;  
+    
+    
+  public static void depositar(double valor) {
+      
+      saldo = saldo + valor;
+        
+      menu();
+  }
   
-    public static void clear(String... arg) throws IOException, InterruptedException {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-    }
-}
-
-class DescobrirTriangulo {
+  public static double sacar(double valor) {
+      
+      saldo = saldo + valor;
+        
+    return saldo;
+  } 
   
-	public static void main(String args[]) throws IOException, InterruptedException{  
-   
-    Scanner teclado = new Scanner(System.in);       
-    Console console = new Console();    
+  public static double exibirSaldo() {
+      
+    System.out.print(saldo);
+        
+    return saldo;
+  }
+  
+  public static void menu() {
+    Scanner teclado = new Scanner(System.in);   
+
+    int opcao;
     
-    int x = 2;
-    int y = 4;
-    int z = 3;
+    System.out.print("Menu do meu sistema\n\n");
+    System.out.print("------------------------\n\n");
+    System.out.print("Por favor selecione uma opcao:\n");
+    System.out.print("------------------------\n\n");
+    System.out.print("[1] - Depositar\n");
+    System.out.print("[2] - Sacar\n");
+    System.out.print("[3] - Exibir saldo\n");
+    System.out.print("[4] - Sair do sistema\n");
     
-    String tipo       = "Isosceles";
+    opcao = teclado.nextInt();       
     
-    int continuar;   
-    
-    if(x == y && x == z){
-      tipo = "Equilatero"; 
-    }
-    
-    if(x != y && x != z){
-      tipo = "Escaleno";
-    }
-    
-    console.clear();
-    
-    System.out.printf("triangulo %s\n\n\n\n\n (: \n\n\n", tipo);
-   
-    System.out.printf("Deseja inserir outro triangulo? ( 1 - Para sim | 2 - para nao)\n");
-    
-    continuar = teclado.nextInt();
-    
-    if(continuar == 1){
+    switch (opcao) {
+      case 1:
+      depositar(10.0);
+      break;
+
+      case 2:
+      sacar(10.0);
+      break;
+
+      case 3:
+      exibirSaldo();
+      break;
+
+      case 4:
+      System.exit(0);
+      break;
+
+    default:
+      System.out.printf("Insira uma opção válida");
       main(null);
     }
     
-    console.clear();
-    System.exit(0);
+  }
+  
 
+	public static void main(String args[]){  
+
+    saldo = 0;
+
+    menu();    
+    
+    System.out.print(saldo);
+    
+    System.exit(0);
+		
 	}
 
 }
